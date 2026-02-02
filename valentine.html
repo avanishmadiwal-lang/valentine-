@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Adi 💖 Will You Be My Valentine?</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      background: white;
+      padding: 35px 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+      width: 380px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 25px;
+      line-height: 1.5;
+      min-height: 90px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 5px;
+      transition: transform 0.3s ease, font-size 0.3s ease;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background: #ddd;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      animation: float 4s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey Adi 💖</h1>
+    <p id="question">
+      Will you be my Valentine? 🌹🥰
+    </p>
+
+    <button id="yes" onclick="yesClicked()">Yes 💕😍</button>
+    <button id="no" onclick="noClicked()">No 🙈😅</button>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    let attempts = 0;
+    let yesScale = 1;
+
+    const cuteQuestions = [
+      "Are you suuure? 🥺💗👉👈 Will you be my Valentine?",
+      "Adi pleaseee 😭💞 I’ll bring chocolates 🍫🥰 Valentine?",
+      "What if I add unlimited hugs 🤗🤍 and cuddles 🐻💖?",
+      "Okay wow rude 😤💔 but still… Valentine? 😌💕",
+      "I’m down bad now 😭🥀 but you’re worth it 💘 Valentine?",
+      "Look at me asking again like a fool 😵‍💫❤️ Valentine?",
+      "This YES button is getting bigger 👀💖 just saying 😌",
+      "At this point it’s destiny 🥹💘 Valentine?"
+    ];
+
+    function noClicked() {
+      attempts++;
+      yesScale += 0.15;
+
+      document.getElementById("question").innerText =
+        cuteQuestions[attempts % cuteQuestions.length];
+
+      const yesBtn = document.getElementById("yes");
+      yesBtn.style.transform = `scale(${yesScale})`;
+      yesBtn.style.fontSize = (16 + attempts * 1.5) + "px";
+    }
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          height:100vh;
+          background:linear-gradient(135deg,#ffb6c1,#ffe4e1);
+          font-family:'Segoe UI',sans-serif;
+          text-align:center;
+        ">
+          <h1 style="color:#ff4d6d;">YAYYYY 😍💖🎉</h1>
+          <p style="font-size:22px;">
+            Adi said YES!!! 🥹❤️✨<br><br>
+            Best decision ever 😌💘<br>
+            I can’t wait to make this Valentine’s special with you 🌹🥰💞
+          </p>
+        </div>
+      `;
+      startHearts();
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️💖💘";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 22 + 16) + "px";
+        document.getElementById("hearts").appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+      }, 250);
+    }
+  </script>
+
+</body>
+</html>
+
